@@ -1,4 +1,10 @@
 FROM ubuntu:latest
 LABEL authors="vddmit"
 
-ENTRYPOINT ["top", "-b"]
+FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+
+COPY target/exporter-0.0.1-SNAPSHOT.jar app.jar
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
