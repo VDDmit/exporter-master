@@ -1,9 +1,12 @@
-package com.reksoft.exporter.service;
+package com.reksoft.exporter.service.impl;
 
 import com.reksoft.exporter.model.Player;
-import com.reksoft.exporter.repository.PlayerApiRepository;
+import com.reksoft.exporter.repository.adapter.api.PlayerApiRepository;
 import com.reksoft.exporter.repository.dto.PlayerViewDto;
+import com.reksoft.exporter.service.PlayerService;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +17,10 @@ import java.util.stream.Stream;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PlayerServiceImpl implements PlayerService {
 
-    private final PlayerApiRepository playerApiRepository;
+    PlayerApiRepository playerApiRepository;
 
     @Override
     public List<Player> getPlayers() {

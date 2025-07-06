@@ -4,13 +4,12 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PlayerDto {
+public class TeamViewDto {
     Integer id;
     String name;
-    String surname;
-    String nickname;
-    Integer country;
-    TeamDto team;
+    List<PlayerViewDto> players;
 }

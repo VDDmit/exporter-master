@@ -1,14 +1,17 @@
 package com.reksoft.exporter.repository.dto;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 
 @Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class RatingDto {
-    private Integer id;
-    private Integer score;
-    private LocalDateTime atMoment;
-    private Integer teamId;
-    private TeamDto team;
+    Integer id;
+    Integer score;
+    LocalDateTime atMoment;
+    Integer teamId;
+    TeamDto team;
 }

@@ -1,7 +1,10 @@
 package com.reksoft.exporter.controller;
 
-import com.reksoft.exporter.service.PlayerCsvReportService;
+import com.reksoft.exporter.service.csv.PlayerCsvReportService;
+import com.reksoft.exporter.service.csv.TeamCsvReportService;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -21,10 +24,12 @@ import java.time.format.DateTimeFormatter;
 @Controller
 @RequestMapping("/report")
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ReportController {
 
-    private final PlayerCsvReportService reportService;
-    private final Clock clock;
+    PlayerCsvReportService reportService;
+    TeamCsvReportService teamCsvReportService;
+    Clock clock;
 
     @GetMapping
     public String getReportPage() {
@@ -47,7 +52,15 @@ public class ReportController {
     }
 
     @GetMapping("/team/download")
-    public ResponseEntity<Resource> downloadTeamReport() {
-        throw new RuntimeException("Отчёт по командам пока не реализован");
+    public ResponseEntity<Resource> downloadTeamReport() throws IOException {
+        String timestamp = LocalDateTime.now(clock).format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+        String filename = "team_report_%s.csv".formatted(timestamp);
+        File reportFile = teamCsvReportService.generateReport(System.getProperty("java.io.tmpdir") + File.separator + filename);
+        FileSystemResource resource = new FileSystemResource(reportFile);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .contentLength(Files.size(reportFile.toPath()))
+                .contentType(MediaType.parseMediaType("text/csv"))
+                .body(resource);
     }
 }

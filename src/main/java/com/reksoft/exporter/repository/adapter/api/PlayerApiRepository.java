@@ -1,8 +1,11 @@
-package com.reksoft.exporter.repository;
+package com.reksoft.exporter.repository.adapter.api;
 
 import com.reksoft.exporter.properties.ApiProperties;
+import com.reksoft.exporter.repository.PlayerRepository;
 import com.reksoft.exporter.repository.dto.PlayerViewDto;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
@@ -15,10 +18,11 @@ import static org.springframework.http.HttpMethod.GET;
 
 @Repository
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PlayerApiRepository implements PlayerRepository {
 
-    private final RestTemplate restTemplate;
-    private final ApiProperties apiProperties;
+    RestTemplate restTemplate;
+    ApiProperties apiProperties;
 
     public List<PlayerViewDto> getPlayers() {
         ResponseEntity<List<PlayerViewDto>> response = restTemplate.exchange(

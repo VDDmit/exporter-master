@@ -1,8 +1,11 @@
-package com.reksoft.exporter.service;
+package com.reksoft.exporter.service.csv;
 
 import com.opencsv.CSVWriter;
 import com.reksoft.exporter.model.Player;
+import com.reksoft.exporter.service.PlayerService;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +18,10 @@ import java.util.Objects;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PlayerCsvReportService {
 
-    private final PlayerService playerService;
+    PlayerService playerService;
 
     public File generateReport(String filePath) throws IOException {
         List<Player> players = playerService.getPlayers();

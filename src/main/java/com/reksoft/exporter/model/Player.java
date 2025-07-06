@@ -1,15 +1,18 @@
 package com.reksoft.exporter.model;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.FieldDefaults;
 
 @Data
 @Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Player {
-    private Integer id;
-    private String fullName;
-    private String nickname;
-    private Integer country;
-    private String teamName;
-    private String fullNameWithNickname;
+    Integer id;
+    String fullName;
+    String nickname;
+    Integer country;
+    String teamName;
+    String fullNameWithNickname;
 }

@@ -1,12 +1,15 @@
 package com.reksoft.exporter.repository.dto;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.experimental.FieldDefaults;
 
 @Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class TournamentPrizeDto {
-    private Integer id;
-    private Integer place;
-    private Integer prize;
-    private Integer tournamentId;
-    private TournamentDto tournament;
+    Integer id;
+    Integer place;
+    Integer prize;
+    Integer tournamentId;
+    TournamentDto tournament;
 }

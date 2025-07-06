@@ -1,16 +1,19 @@
 package com.reksoft.exporter.repository.dto;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
 @Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class TeamDto {
-    private Integer id;
-    private String name;
-    private List<PlayerDto> players;
-    private List<TournamentParticipantInfoDto> teamTournamentResults;
-    private List<RatingDto> teamRatings;
-    private List<MatchHistoryDto> matchesWon;
-    private List<MatchHistoryDto> matchesLost;
+    Integer id;
+    String name;
+    List<PlayerDto> players;
+    List<TournamentParticipantInfoDto> teamTournamentResults;
+    List<RatingDto> teamRatings;
+    List<MatchHistoryDto> matchesWon;
+    List<MatchHistoryDto> matchesLost;
 }
