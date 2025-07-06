@@ -9,4 +9,5 @@ public class PlayerViewDto {
     private String nickName;
     private Integer country;
     private String teamName;
+    private String fullNameWithNickname;
 }
