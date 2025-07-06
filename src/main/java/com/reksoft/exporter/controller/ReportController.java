@@ -33,8 +33,8 @@ public class ReportController {
     TeamCsvReportService teamCsvReportService;
     Clock clock;
 
-    private static final DateTimeFormatter TIMESTAMP_FORMAT = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
-    private static final String TMP_DIR = System.getProperty("java.io.tmpdir");
+    static DateTimeFormatter TIMESTAMP_FORMAT = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+    static String TMP_DIR = System.getProperty("java.io.tmpdir");
 
     @GetMapping
     public String getReportPage() {
